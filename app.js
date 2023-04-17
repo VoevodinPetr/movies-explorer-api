@@ -7,8 +7,8 @@ const cors = require('cors');
 
 const { apiLimiter } = require('./middlewares/limiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { routes } = require('./routes');
-const { handelError } = require('./middlewares/handelError');
+const routes = require('./routes');
+const handelError = require('./middlewares/handelError');
 const configDefault = require('./utils/configDefault');
 
 const {
@@ -39,5 +39,5 @@ app.use(errors());
 app.use(handelError);
 
 app.listen(PORT, () => {
-  console.log(`App started on port ${PORT}...`);
+  console.log(`App listening on port ${PORT}`);
 });
