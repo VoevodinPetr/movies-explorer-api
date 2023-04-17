@@ -17,6 +17,7 @@ const ERROR_MESSAGES = {
   REQUESTED_PAGE_NOT_FOUND: 'Запрашиваемый страница не найдена',
   UNKNOWN_ERROR: 'Что-то пошло не так',
   AUTHORIZATION_REQUIRED: 'Необходима авторизация',
+  INCORRECT_EMAIL_OR_PASSWORD: 'Неправильная почта или пароль',
 };
 
 module.exports = {
