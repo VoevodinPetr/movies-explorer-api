@@ -1,9 +1,10 @@
 const { STATUS_CODES } = require('../utils/constants');
 
-class AuthError extends Error {
+class Conflict extends Error {
   constructor(message) {
     super(message);
-    this.statusCode = STATUS_CODES.AUTH;
+    this.statusCode = STATUS_CODES.CONFLICT;
   }
 }
-module.exports = AuthError;
+
+module.exports = Conflict;

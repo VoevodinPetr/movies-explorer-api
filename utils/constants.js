@@ -2,25 +2,36 @@ const STATUS_CODES = {
   CONFLICT: 409,
   FORBIDDEN: 403,
   NOT_FOUND: 404,
-  AUTH: 401,
+  AAuthorizationRequired: 401,
   BAD_REQUEST: 400,
   INTERNAL_SERVER_ERROR: 500,
 };
 
-const ERROR_MESSAGES = {
-  USER_NOT_FOUND: 'Пользователь не найден',
-  DATA_PROCESSING_ERROR: 'Ошибка обработки данных',
-  USER_CONFLICT: 'Пользователь с таким email уже существует',
-  MOVIE_NOT_FOUND: 'Фильм не найден',
-  FORBIDDEN_DELETE_MOVIE_USER: 'Запрещено удалять фильм жруго пользователя',
-  INVALID_MOVIE_ID: 'Некорректный _id фильма',
-  REQUESTED_PAGE_NOT_FOUND: 'Запрашиваемый страница не найдена',
-  UNKNOWN_ERROR: 'Что-то пошло не так',
-  AUTHORIZATION_REQUIRED: 'Необходима авторизация',
-  INCORRECT_EMAIL_OR_PASSWORD: 'Неправильная почта или пароль',
-};
+const USER_CONFLIC = 'Пользователь с таким email уже существует';
+const INCORRECT_DATA_ENTERED = 'Введены некоректные данные';
+const DATA_PROCESSING_ERROR = 'Ошибка обработки данных';
+const MOVIE_NOT_FOUND = 'Фильм не найден';
+const FORBIDDEN_DELETE_MOVIE_USER = 'Запрещено удалять фильм друго пользователя';
+const INVALID_MOVIE_ID = 'Некорректный _id фильма';
+const USER_NOT_FOUND = 'Пользователь не найден';
+const AUTHORIZATION_REQUIRED = 'Необходима авторизация';
+const INCORRECT_EMAIL_OR_PASSWORD = 'Неправильные почта или пароль';
+const THE_REQUESTED_RESOURCE_IS_NOT_FOUND = 'Запрашиваемый ресурс не найден';
+const UNKNOWN_ERROR = 'На сервере произошла ошибка';
 
 module.exports = {
-  ERROR_MESSAGES,
+  USER_CONFLIC,
+  INCORRECT_DATA_ENTERED,
+  DATA_PROCESSING_ERROR,
+  MOVIE_NOT_FOUND,
+  FORBIDDEN_DELETE_MOVIE_USER,
+  INVALID_MOVIE_ID,
+  USER_NOT_FOUND,
+  AUTHORIZATION_REQUIRED,
+  INCORRECT_EMAIL_OR_PASSWORD,
+  THE_REQUESTED_RESOURCE_IS_NOT_FOUND,
+  UNKNOWN_ERROR,
   STATUS_CODES,
 };
+
+module.exports.REGEX = /^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-/])*)?/;

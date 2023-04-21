@@ -6,4 +6,5 @@ class BadRequest extends Error {
     this.statusCode = STATUS_CODES.BAD_REQUEST;
   }
 }
+
 module.exports = BadRequest;
