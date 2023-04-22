@@ -10,7 +10,7 @@ const {
 } = require('../utils/constants');
 
 module.exports.createMovies = (req, res, next) => {
-  Movie.create({ ...req.body, owner: req.user._id }).populate('owner')
+  Movie.create({ ...req.body, owner: req.user._id })
     .then((movie) => {
       res.status(200).send({ data: movie });
     })
@@ -27,7 +27,7 @@ module.exports.createMovies = (req, res, next) => {
 module.exports.getMovie = (req, res, next) => {
   const owner = req.user._id;
 
-  Movie.find({ owner }).populate('owner')
+  Movie.find({ owner })
     .then((movie) => {
       res.status(200).send({ data: movie });
     })
@@ -37,7 +37,7 @@ module.exports.getMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findById(req.params._id).populate('owner')
+  Movie.findById(req.params._id)
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError(MOVIE_NOT_FOUND);
