@@ -1,5 +1,4 @@
-const NotFoundError = require('../errors/NotFoundError');
-const { THE_REQUESTED_RESOURCE_IS_NOT_FOUND, UNKNOWN_ERROR, STATUS_CODES } = require('../utils/constants');
+const { UNKNOWN_ERROR, STATUS_CODES } = require('../utils/constants');
 
 const SERVER_ERROR = (err, req, res, next) => {
   // если у ошибки нет статуса, выставляем 500
@@ -12,11 +11,6 @@ const SERVER_ERROR = (err, req, res, next) => {
   next();
 };
 
-const NOT_FOUND_ERROR = (req, res, next) => {
-  next(new NotFoundError(THE_REQUESTED_RESOURCE_IS_NOT_FOUND));
-};
-
 module.exports = {
   SERVER_ERROR,
-  NOT_FOUND_ERROR,
 };

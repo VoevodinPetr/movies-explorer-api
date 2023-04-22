@@ -8,8 +8,8 @@ const {
   deleteMovie,
 } = require('../controllers/movies');
 
-movieRouters.get('/movies', getMovie);
-movieRouters.post('/movies', validationCreateMovies, createMovies);
-movieRouters.delete('/movies/:_id', validationDeleteMovie, deleteMovie);
+movieRouters.get('/', getMovie);
+movieRouters.post('/', validationCreateMovies, createMovies);
+movieRouters.delete('/:_id', validationDeleteMovie, deleteMovie);
 
 module.exports = movieRouters;
