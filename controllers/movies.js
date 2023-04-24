@@ -12,7 +12,7 @@ const {
 module.exports.createMovies = (req, res, next) => {
   Movie.create({ ...req.body, owner: req.user._id })
     .then((movie) => {
-      res.status(200).send({ data: movie });
+      res.status(200).send({ movie });
     })
 
     .catch((err) => {
@@ -29,7 +29,7 @@ module.exports.getMovie = (req, res, next) => {
 
   Movie.find({ owner })
     .then((movie) => {
-      res.status(200).send({ data: movie });
+      res.status(200).send({ movie });
     })
     .catch((err) => {
       next(err);
@@ -37,14 +37,15 @@ module.exports.getMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findById(req.params._id)
+  const { _id } = req.params;
+  Movie.findById(_id)
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError(MOVIE_NOT_FOUND);
       } else if (!movie.owner.equals(req.user._id)) {
         throw new Forbidden(FORBIDDEN_DELETE_MOVIE_USER);
       }
-      return movie.remove().then(() => res.status(200).send(movie));
+      Movie.deleteOne(movie).then(() => res.status(200).send(movie));
     })
     .catch((err) => {
       if (err.name === 'CastError') {

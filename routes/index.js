@@ -7,11 +7,11 @@ const NotFoundError = require('../errors/NotFoundError');
 const { THE_REQUESTED_RESOURCE_IS_NOT_FOUND } = require('../utils/constants');
 
 router.use('/', authRouters);
-router.all('*', auth);
-router.use('/users', userRouters);
-router.use('/movies', movieRouters);
+router.use(auth);
+router.use('/', userRouters);
+router.use('/', movieRouters);
 
-router.all('*', (req, res, next) => {
+router.use('*', (req, res, next) => {
   next(new NotFoundError(THE_REQUESTED_RESOURCE_IS_NOT_FOUND));
 });
 

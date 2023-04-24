@@ -26,12 +26,12 @@ mongoose.connect(DATABASE_ADRESS)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
+app.use(requestLogger);
 app.use(apiLimiter);
 app.use(cors());
-app.use(requestLogger);
-app.use(helmet());
 
-app.use(routes);
+app.use('/', routes);
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors()); // обработчик ошибок celebrate
 app.use(SERVER_ERROR);
