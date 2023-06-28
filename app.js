@@ -29,7 +29,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(requestLogger);
 app.use(apiLimiter);
-app.use(cors());
+app.use(cors({
+  origin: ['http://supermovies1.nomoredomains.monster',
+    'https://supermovies1.nomoredomains.monster',
+    'http://supermovies.nomoredomains.monster',
+    'https://supermovies.nomoredomains.monster',
+    'http://localhost:3000',
+    'https://localhost:3000',
+    'http://localhost:3001',
+    'https://localhost:3001'],
+  credentials: true,
+}));
 
 app.use('/', routes);
 app.use(errorLogger); // подключаем логгер ошибок
