@@ -12,9 +12,7 @@ module.exports.updateUser = (req, res, next) => {
       { email, name },
       { new: true, runValidators: true },
     )
-    .then((user) => {
-      res.status(200).send({ data: user });
-    })
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequest(DATA_PROCESSING_ERROR));
@@ -32,7 +30,7 @@ module.exports.getUser = (req, res, next) => {
       if (!user) {
         throw new NotFoundError(USER_NOT_FOUND);
       }
-      return res.status(200).send({ data: user });
+      return res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

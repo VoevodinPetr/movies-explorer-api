@@ -10,10 +10,35 @@ const {
 } = require('../utils/constants');
 
 module.exports.createMovies = (req, res, next) => {
-  Movie.create({ ...req.body, owner: req.user._id })
-    .then((movie) => {
-      res.status(200).send({ movie });
-    })
+  const owner = req.user._id;
+  const {
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    thumbnail,
+    movieId,
+    nameRU,
+    nameEN,
+  } = req.body;
+  Movie.create({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    thumbnail,
+    owner,
+    movieId,
+    nameRU,
+    nameEN,
+  })
+    .then((movie) => res.send(movie))
 
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -28,12 +53,8 @@ module.exports.getMovie = (req, res, next) => {
   const owner = req.user._id;
 
   Movie.find({ owner })
-    .then((movie) => {
-      res.status(200).send({ movie });
-    })
-    .catch((err) => {
-      next(err);
-    });
+    .then((movies) => res.send(movies))
+    .catch(next);
 };
 
 module.exports.deleteMovie = (req, res, next) => {
