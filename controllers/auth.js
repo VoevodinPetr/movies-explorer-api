@@ -9,29 +9,22 @@ const Conflict = require('../errors/Conflict');
 const { USER_CONFLIC, INCORRECT_DATA_ENTERED } = require('../utils/constants');
 
 module.exports.createUser = (req, res, next) => {
-  const {
-    name, email, password,
-  } = req.body;
+  const { name, email, password } = req.body;
 
   bcrypt
     .hash(password, SALT_LENGTH)
-
     .then((hash) => Auth.create({
       name,
       email,
       password: hash,
     }))
-    .then((user) => {
-      res.status(201).send({
-        name: user.name,
-        email: user.email,
-      });
-    })
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequest(INCORRECT_DATA_ENTERED));
         return;
-      } if (err.code === 11000) {
+      }
+      if (err.code === 11000) {
         next(new Conflict(USER_CONFLIC));
         return;
       }
