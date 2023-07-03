@@ -21,12 +21,7 @@ module.exports.createUser = (req, res, next) => {
       email,
       password: hash,
     }))
-    .then((user) => {
-      res.status(201).send({
-        name: user.name,
-        email: user.email,
-      });
-    })
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequest(INCORRECT_DATA_ENTERED));
